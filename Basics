@@ -1,0 +1,78 @@
+Compiling in Ocaml from a program.ml is done via the line:
+
+  $ ocamlbuild program.native
+
+
+  Typing:
+
+  Ocaml is strictly typed, as such it is handy to think that every type is distinct
+  and not readily interactive because chances are they aren't. I.e. floats and Ints
+
+  Int: 31 bit number with 1 bit sign uses basic maths (+, - , * /)
+  float: IEEE double precision floating point number using it's own operators (+. , -. , *. , /.)
+    The addition of the . denotes a floating point operator
+
+    to use these between ints and floats the int the number must be explicitly cast
+    into one of the types i.e.:
+
+    let x = 1;;
+    let y = 2.0;;
+
+    (float_of_int) x +. y;;
+          or
+    float x +. y;;
+          or
+    (int_of_float) y + x;;
+
+
+    Types include:
+    OCaml type  Range
+
+    int         31-bit signed int (roughly +/- 1 billion) on 32-bit
+                processors, or 63-bit signed int on 64-bit processors
+    float       IEEE double-precision floating point, equivalent to C's double
+    bool        A boolean, written either true or false
+    char        An 8-bit character
+    string      A string
+    unit        Written as ()
+
+Declaration of functions:
+
+let function_name arg1 arg 2
+
+  note: functions do not have brackets to distinguish arguments, in fact
+  bracket create tuples which are treated as their own argument
+
+let fuction_name (arg 1; arg 2) arg3
+
+  the above function only has 2 arguments one of them being a tuple
+
+
+to create a recursive function, to enable it to call itself you declare like so
+
+let rec function_name
+
+The addition of rec changes the scope in which the function will look for other function names.
+With rec it will look at the function itself first before proceeding to previously used functions
+as such the addition of rec does not effect functionality at all of non-recursive functions.
+
+Type Inference:
+
+Ocaml uses type inference to save on the verbosity of the program. When looking at the typing
+of a function Ocaml will use the format
+
+Some_function: arg1_type -> arg2_type -> return_Type
+
+
+Polymorphic functions:
+
+Consider the declaration:
+
+let fuction_name x = 3
+
+Regardless of the input the function will always return the integer three, so if when type inferred this
+will show up as
+
+'a -> int
+
+'a denotes any type, polymorphism will be extremely useful later as they can be thought of as generic types
